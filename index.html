@@ -93,9 +93,6 @@
 
 				// Save screen taps as normalized coordinates for use in this.updateScene
 				_onTouchStart(ev){
-					//Tracks count of how many objects have been placed
-					var count = 0;
-					
 					if (!ev.touches || ev.touches.length === 0) {
 						console.error('No touches on touch event', ev)
 						return
@@ -106,6 +103,10 @@
 
 					// Attempt a hit test using the normalized screen coordinates
 					this.session.hitTest(x, y).then(anchorOffset => {
+						
+						//Tracks count of how many objects have been placed
+						var count = 0;
+					
 						if (count >= 1) {
 							this._messageEl.innerHTML = 'Object alreafy placed.'
 							break;
