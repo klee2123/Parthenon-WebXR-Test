@@ -90,11 +90,12 @@
 				updateScene(frame){
 				}
 
-				//Tracks count of how many objects have been placed
-				var count = 0;
 
 				// Save screen taps as normalized coordinates for use in this.updateScene
 				_onTouchStart(ev){
+					//Tracks count of how many objects have been placed
+					var count = 0;
+					
 					if (!ev.touches || ev.touches.length === 0) {
 						console.error('No touches on touch event', ev)
 						return
