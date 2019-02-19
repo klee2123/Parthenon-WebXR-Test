@@ -69,9 +69,7 @@
 
 				// Called during construction to allow the app to populate this.scene
 				initializeScene(){
-					// Instantiate a GLTF loader
-					var loader = new THREE.GLTFLoader();
-					
+				
 					var axesHelper = AxesHelper( 0.2 );
 		            		this.floorGroup.add( axesHelper );
 					this.floorGroup.add(box)
@@ -116,9 +114,22 @@
 					}).catch(err => {
 						console.error('Error in hit test', err)
 					})
+				
+				
 				}
 
+			
+					
+				
+				
 
+
+			// Inserts GLTF to indicate the location of an anchor offset
+			_createSceneGraphNode(){
+				let group = new THREE.Group()
+				// Instantiate a GLTF loader
+				
+				var loader = new THREE.GLTFLoader();
 				// Load a glTF resource
 				loader.load(
 					// resource URL
@@ -141,13 +152,8 @@
 					gltf.scenes; // Array<THREE.Scene>
 					gltf.cameras; // Array<THREE.Camera>
 					gltf.asset; // Object
-
-				);
-
-
-			// Inserts GLTF to indicate the location of an anchor offset
-			_createSceneGraphNode(){
-				let group = new THREE.Group()
+				
+						);
 				group.add(gltf)
 				return group
 			}
