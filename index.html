@@ -1,6 +1,7 @@
+
   <html>
 	<head>
-		<title>Acropolis Hit Test</title>
+		<title>Hit test example</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<style>
@@ -89,9 +90,6 @@
 				updateScene(frame){
 				}
 
-				//Tracks count of how many objects have been placed
-				var count = 0;
-
 				// Save screen taps as normalized coordinates for use in this.updateScene
 				_onTouchStart(ev){
 					if (!ev.touches || ev.touches.length === 0) {
@@ -104,10 +102,7 @@
 
 					// Attempt a hit test using the normalized screen coordinates
 					this.session.hitTest(x, y).then(anchorOffset => {
-						if (count >= 1) {
-							this._messageEl.innerHTML = 'Object alreafy placed.'
-							break;
-						} else if (anchorOffset === null){
+						if(anchorOffset === null){
 							this._messageEl.innerHTML = 'miss'
 						} else {
 							this._messageEl.innerHTML = 'hit'
@@ -118,28 +113,17 @@
 					})
 				}
 
-				// Instantiate a GLTF loader
-				var loader = new THREE.GLTFLoader();
-
-				// Load a glTF resource
-				loader.load(
-					// resource URL
-					'AcropolisModel.gltf' ,
-					// called when the resource is loaded
-
-				);
-
-
-			// Inserts GLTF to indicate the location of an anchor offset
-			_createSceneGraphNode(){
-				let group = new THREE.Group()
-				group.add(gltf)
-				return group
+				// Creates a box used to indicate the location of an anchor offset
+				_createSceneGraphNode(){
+					let group = new THREE.Group()
+					let geometry = new THREE.BoxBufferGeometry(0.1, 0.1, 0.1)
+					let material = new THREE.MeshPhongMaterial({ color: '#99FF99' })
+					let mesh = new THREE.Mesh(geometry, material)
+					mesh.position.set(0, 0.05, 0)
+					group.add(mesh)
+					return group
+				}
 			}
-
-			}
-
-
 
 			function AxesHelper( size ) {
 				size = size || 1;
