@@ -69,14 +69,11 @@
 
 				// Called during construction to allow the app to populate this.scene
 				initializeScene(){
-					// Add a box at the scene origin
-					let box = new THREE.Mesh(
-						new THREE.BoxBufferGeometry(0.1, 0.1, 0.1),
-						new THREE.MeshPhongMaterial({ color: '#DDFFDD' })
-					)
-					box.position.set(0, 0.05, 0)
+					// Instantiate a GLTF loader
+					var loader = new THREE.GLTFLoader();
+					
 					var axesHelper = AxesHelper( 0.2 );
-		            this.floorGroup.add( axesHelper );
+		            		this.floorGroup.add( axesHelper );
 					this.floorGroup.add(box)
 
 					// Add a few lights
@@ -121,8 +118,6 @@
 					})
 				}
 
-				// Instantiate a GLTF loader
-				var loader = new THREE.GLTFLoader();
 
 				// Load a glTF resource
 				loader.load(
