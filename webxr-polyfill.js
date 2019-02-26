@@ -482,10 +482,6 @@ function multiply(out, a, b) {
 
 
 
-
-
-
-
 function fromRotationTranslation(out, q, v) {
   var x = q[0],
       y = q[1],
