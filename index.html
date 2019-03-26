@@ -113,20 +113,21 @@
 				_createSceneGraphNode(){
 					var loader = new THREE.GLTFLoader();
 					loader.load(
-					// resource URL
-					'models/gltf/duck/duck.gltf',
-					// called when the resource is loaded
-					function ( gltf ) {
+						// resource URL
+						'AcropolisModel.gltf',
+						// called when the resource is loaded
+						function ( gltf ) {
 
-						scene.add( gltf.scene );
+							scene.add( gltf.scene );
 
-						gltf.animations; // Array<THREE.AnimationClip>
-						gltf.scene; // THREE.Scene
-						gltf.scenes; // Array<THREE.Scene>
-						gltf.cameras; // Array<THREE.Camera>
-						gltf.asset; // Object
+							gltf.animations; // Array<THREE.AnimationClip>
+							gltf.scene; // THREE.Scene
+							gltf.scenes; // Array<THREE.Scene>
+							gltf.cameras; // Array<THREE.Camera>
+							gltf.asset; // Object
 
-					});
+						}
+					);
 
 // 					let group = new THREE.Group()
 // 					let geometry = new THREE.BoxBufferGeometry(0.1, 0.1, 0.1)
