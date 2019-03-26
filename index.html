@@ -1,0 +1,176 @@
+ <html>
+	<head>
+		<title>Acropolis Hit Test</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="common.css">
+		<script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+		<script src="libs/three.min.js"></script>
+<!-- 	
+		<script type="module" src="../../polyfill/XRPolyfill.js"></script>
+		<script nomodule src="../../dist/webxr-polyfill.js"></script>
+ -->		
+ 		<script src="webxr-polyfill.js"></script>
+		<script src="common.js"></script>
+	</head>
+	<body>
+		<div id="target" />
+		<div onclick="hideMe(this)" id="description">
+			<h2>Hit Test</h2>
+			<h5>(click to dismiss)</h5>
+			<p>Find anchors by searching on tap events.</p>
+		</div>
+		<script>
+			/*
+			HitTestExample shows how to find surfaces or other features and place content relative to them.
+
+			In a production application, you would not create a separate anchor for every user action because
+			your application would quickly slow down tracking so many anchors. Instead, find an anchor
+			for groups of content that are positioned relative to some surface or other feature.
+			*/
+			class HitTestExample extends XRExampleBase {
+				constructor(domElement){
+					super(domElement, false)
+					// A message at the bottom of the screen that shows whether a surface has been found
+					this._messageEl = document.createElement('div')
+					this.el.appendChild(this._messageEl)
+					this._messageEl.style.position = 'absolute'
+					this._messageEl.style.bottom = '10px'
+					this._messageEl.style.left = '10px'
+					this._messageEl.style.color = 'white'
+					this._messageEl.style['font-size'] = '16px'
+
+					this.el.addEventListener('touchstart', this._onTouchStart.bind(this), false)
+				}
+
+				// Called during construction to allow the app to populate this.scene
+				initializeScene(){
+				
+					var axesHelper = AxesHelper( 0.2 );
+		            		this.floorGroup.add( axesHelper );
+
+					// Add a few lights
+					this.scene.add(new THREE.AmbientLight('#FFF', 0.2))
+					let directionalLight = new THREE.DirectionalLight('#FFF', 0.6)
+					directionalLight.position.set(0, 10, 0)
+					this.scene.add(directionalLight)
+				}
+
+				// Called once per frame, before render, to give the app a chance to update this.scene
+				updateScene(frame){
+				}
+
+
+				// Save screen taps as normalized coordinates for use in this.updateScene
+				_onTouchStart(ev){
+					if (!ev.touches || ev.touches.length === 0) {
+						console.error('No touches on touch event', ev)
+						return
+					}
+
+					const x = ev.touches[0].clientX / window.innerWidth
+					const y = ev.touches[0].clientY / window.innerHeight
+
+					// Attempt a hit test using the normalized screen coordinates
+					this.session.hitTest(x, y).then(anchorOffset => {
+						
+						//Tracks count of how many objects have been placed
+						var count = 0;
+					
+						if (count >= 1) {
+							this._messageEl.innerHTML = 'Object alreafy placed.'
+							break;
+						} else if (anchorOffset === null){
+							this._messageEl.innerHTML = 'miss'
+						} else {
+							this._messageEl.innerHTML = 'hit'
+							this.addAnchoredNode(anchorOffset, this._createSceneGraphNode())
+						}
+					}).catch(err => {
+						console.error('Error in hit test', err)
+					})
+				
+				
+				}
+
+			
+					
+				
+				
+
+
+			// Inserts GLTF to indicate the location of an anchor offset
+			_createSceneGraphNode(){
+				let group = new THREE.Group()
+				// Instantiate a GLTF loader
+				
+				var loader = new THREE.GLTFLoader();
+				// Load a glTF resource
+				loader.load(
+					// resource URL
+					'AcropolisModel.gltf' );
+// 					// called when the resource is loaded
+// 					function ( gltf ) {
+// 						// gltf.scene.traverse( function (child) ) {
+// 						// 	if (child.isMesh) {
+// 						// 		child.geometry.center()
+// 						// 	}
+// 						// }
+ 					//Set Scale
+ 					gltf.scene.scale.set(10,10,10)
+ 					scene.add( gltf.scene ) 
+// 					//, (xhr) => xhr, ( err ) => console.error(e);
+
+
+// 					gltf.animations; // Array<THREE.AnimationClip>
+// 					gltf.scene; // THREE.Scene
+// 					gltf.scenes; // Array<THREE.Scene>
+// 					gltf.cameras; // Array<THREE.Camera>
+// 					gltf.asset; // Object
+				
+// 					);
+				group.add(gltf);
+				return group;
+			}
+
+			}
+
+
+
+			function AxesHelper( size ) {
+				size = size || 1;
+
+				var vertices = [
+					0, 0, 0,	size, 0, 0,
+					0, 0, 0,	0, size, 0,
+					0, 0, 0,	0, 0, size
+				];
+
+				var colors = [
+					1, 0, 0,	1, 0.6, 0,
+					0, 1, 0,	0.6, 1, 0,
+					0, 0, 1,	0, 0.6, 1
+				];
+
+				var geometry = new THREE.BufferGeometry();
+				geometry.addAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
+				geometry.addAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ) );
+
+				var material = new THREE.LineBasicMaterial( { vertexColors: THREE.VertexColors } );
+
+				return new THREE.LineSegments(geometry, material);
+			}
+
+
+			window.addEventListener('DOMContentLoaded', () => {
+				setTimeout(() => {
+					try {
+						window.pageApp = new HitTestExample(document.getElementById('target'))
+					} catch(e) {
+						console.error('page error', e)
+					}
+				}, 1000)
+			})
+		</script>
+	</body>
+</html>
+
