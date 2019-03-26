@@ -86,12 +86,7 @@
 					})
 				
 				
-				}
-
-			
-					
-				
-				
+				}		
 
 
 			// Inserts GLTF to indicate the location of an anchor offset
@@ -104,26 +99,26 @@
 				loader.load(
 					// resource URL
 					'AcropolisModel.gltf' );
-// 					// called when the resource is loaded
-// 					function ( gltf ) {
-// 						// gltf.scene.traverse( function (child) ) {
-// 						// 	if (child.isMesh) {
-// 						// 		child.geometry.center()
-// 						// 	}
-// 						// }
+ 					// called when the resource is loaded
+ 					function ( gltf ) {
+ 						 gltf.scene.traverse( function (child) ) {
+ 						 	if (child.isMesh) {
+ 						 		child.geometry.center()
+						 	}
+ 						 }
  					//Set Scale
  					gltf.scene.scale.set(10,10,10)
  					scene.add( gltf.scene ) 
-// 					//, (xhr) => xhr, ( err ) => console.error(e);
+ 					, (xhr) => xhr, ( err ) => console.error(e);
 
 
-// 					gltf.animations; // Array<THREE.AnimationClip>
-// 					gltf.scene; // THREE.Scene
-// 					gltf.scenes; // Array<THREE.Scene>
-// 					gltf.cameras; // Array<THREE.Camera>
-// 					gltf.asset; // Object
+ 					gltf.animations; // Array<THREE.AnimationClip>
+ 					gltf.scene; // THREE.Scene
+ 					gltf.scenes; // Array<THREE.Scene>
+ 					gltf.cameras; // Array<THREE.Camera>
+ 					gltf.asset; // Object
 				
-// 					);
+ 					);
 				group.add(gltf);
 				return group;
 			}
