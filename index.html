@@ -100,11 +100,15 @@
 					this.session.hitTest(x, y).then(anchorOffset => {
 						if(anchorOffset === null){
 							this._messageEl.innerHTML = 'miss'
-						} else {
+						} else if (c < 1) {
 							c = 1
 							this._messageEl.innerHTML = 'hit'
 							this.addAnchoredNode(anchorOffset, this._createSceneGraphNode())
+						} else {
+							this._messageEl.innerHTML = 'object already placed'
 						}
+
+							
 					}).catch(err => {
 						console.error('Error in hit test', err)
 					})
