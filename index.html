@@ -80,6 +80,7 @@
 					let directionalLight = new THREE.DirectionalLight('#FFF', 0.6)
 					directionalLight.position.set(0, 10, 0)
 					this.scene.add(directionalLight)
+					var count = 0;
 				}
 
 				// Called once per frame, before render, to give the app a chance to update this.scene
@@ -88,7 +89,6 @@
 
 				// Save screen taps as normalized coordinates for use in this.updateScene
 				_onTouchStart(ev){
-					var count = 0;
 					if (!ev.touches || ev.touches.length === 0) {
 						console.error('No touches on touch event', ev)
 						return
@@ -106,7 +106,7 @@
 						} else {
 							this._messageEl.innerHTML = 'hit'
 							this.addAnchoredNode(anchorOffset, this._createSceneGraphNode())
-							count += 1;
+							count = 1;
 						}
 					}).catch(err => {
 						console.error('Error in hit test', err)
