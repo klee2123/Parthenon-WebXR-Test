@@ -88,6 +88,7 @@
 
 				// Save screen taps as normalized coordinates for use in this.updateScene
 				_onTouchStart(ev){
+					var count = 0;
 					if (!ev.touches || ev.touches.length === 0) {
 						console.error('No touches on touch event', ev)
 						return
@@ -100,9 +101,12 @@
 					this.session.hitTest(x, y).then(anchorOffset => {
 						if(anchorOffset === null){
 							this._messageEl.innerHTML = 'miss'
+						} if (count >= 1) {
+							this._messageEl.innerHTML = 'object already placed'
 						} else {
 							this._messageEl.innerHTML = 'hit'
 							this.addAnchoredNode(anchorOffset, this._createSceneGraphNode())
+							count += 1;
 						}
 					}).catch(err => {
 						console.error('Error in hit test', err)
