@@ -101,7 +101,8 @@
 					this.session.hitTest(x, y).then(anchorOffset => {
 						if(anchorOffset === null){
 							this._messageEl.innerHTML = 'miss'
-						} else if (count >= 1) {
+						}
+						if (count >= 1) {
 							this._messageEl.innerHTML = 'object already placed'
 						} else {
 							this._messageEl.innerHTML = 'hit'
