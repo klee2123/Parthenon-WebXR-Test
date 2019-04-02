@@ -111,69 +111,42 @@
 
 				// Creates a box used to indicate the location of an anchor offset
 				_createSceneGraphNode(){
+					let group = new THREE.Group()
+					var THREE = window.THREE = require('three');
+					require('three/examples/js/loaders/GLTFLoader');
 					var loader = new THREE.GLTFLoader();
-					loader.load(
-						// resource URL
-						'AcropolisModel.gltf',
-						// called when the resource is loaded
-						function ( gltf ) {
-
-							scene.add( gltf.scene );
-
-							gltf.animations; // Array<THREE.AnimationClip>
-							gltf.scene; // THREE.Scene
-							gltf.scenes; // Array<THREE.Scene>
-							gltf.cameras; // Array<THREE.Camera>
-							gltf.asset; // Object
-
-						},
-						// called while loading is progressing
-						function ( xhr ) {
-
-							console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-
-						},
-						// called when loading has errors
-						function ( error ) {
-
-							console.log( 'An error happened' );
-
-						}
-					);
-
-// 					let group = new THREE.Group()
-// 					let geometry = gltf;
-// 					let material = new THREE.MeshPhongMaterial({ color: '#99FF99' })
-// 					let mesh = new THREE.Mesh(geometry, material)
-// 					mesh.position.set(0, 0.05, 0)
-// 					group.add(mesh)
- 					return gltf
+					loader.load( 'AcropolisModel.gltf', function ( gltf ) {
+						group.add( gltf.scene );
+					}, undefined, function ( error ) {
+						console.error( error );
+					} );
+					return(group);
 				}
 			}
 
-			function AxesHelper( size ) {
-				size = size || 1;
+// 			function AxesHelper( size ) {
+// 				size = size || 1;
 
-				var vertices = [
-					0, 0, 0,	size, 0, 0,
-					0, 0, 0,	0, size, 0,
-					0, 0, 0,	0, 0, size
-				];
+// 				var vertices = [
+// 					0, 0, 0,	size, 0, 0,
+// 					0, 0, 0,	0, size, 0,
+// 					0, 0, 0,	0, 0, size
+// 				];
 
-				var colors = [
-					1, 0, 0,	1, 0.6, 0,
-					0, 1, 0,	0.6, 1, 0,
-					0, 0, 1,	0, 0.6, 1
-				];
+// 				var colors = [
+// 					1, 0, 0,	1, 0.6, 0,
+// 					0, 1, 0,	0.6, 1, 0,
+// 					0, 0, 1,	0, 0.6, 1
+// 				];
 
-				var geometry = new THREE.BufferGeometry();
-				geometry.addAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
-				geometry.addAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ) );
+// 				var geometry = new THREE.BufferGeometry();
+// 				geometry.addAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
+// 				geometry.addAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ) );
 
-				var material = new THREE.LineBasicMaterial( { vertexColors: THREE.VertexColors } );
+// 				var material = new THREE.LineBasicMaterial( { vertexColors: THREE.VertexColors } );
 
-				return new THREE.LineSegments(geometry, material);
-			}
+// 				return new THREE.LineSegments(geometry, material);
+// 			}
 
 
 			window.addEventListener('DOMContentLoaded', () => {
