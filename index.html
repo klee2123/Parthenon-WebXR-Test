@@ -48,6 +48,7 @@
 			your application would quickly slow down tracking so many anchors. Instead, find an anchor
 			for groups of content that are positioned relative to some surface or other feature.
 			*/
+			var placed = false;
 			class HitTestExample extends XRExampleBase {
 				constructor(domElement){
 					super(domElement, false)
@@ -99,10 +100,12 @@
 					this.session.hitTest(x, y).then(anchorOffset => {
 						if(anchorOffset === null){
 							this._messageEl.innerHTML = 'miss'
-						} else {
+						} else if (!placed) {
 							this._messageEl.innerHTML = 'hit'
 							this.addAnchoredNode(anchorOffset, this._createSceneGraphNode())
-						} 
+						} else {
+							this._messageEl.innerHTML = 'object already placed'
+						}
 
 							
 					}).catch(err => {
