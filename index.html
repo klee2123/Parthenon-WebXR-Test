@@ -103,6 +103,7 @@
 						} else if (!placed) {
 							this._messageEl.innerHTML = 'hit'
 							this.addAnchoredNode(anchorOffset, this._createSceneGraphNode())
+							palced = true;
 						} else {
 							this._messageEl.innerHTML = 'object already placed'
 						}
