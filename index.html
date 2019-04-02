@@ -99,9 +99,9 @@
 					// Attempt a hit test using the normalized screen coordinates
 					this.session.hitTest(x, y).then(anchorOffset => {
 						if(anchorOffset === null){
-							this._messageEl.innerHTML = 'missed'
+							this._messageEl.innerHTML = 'miss'
 						} else if (!placed) {
-							this._messageEl.innerHTML = 'hitttttttttt'
+							this._messageEl.innerHTML = 'hit'
 							this.addAnchoredNode(anchorOffset, this._createSceneGraphNode())
 							placed = true;
 						} else {
