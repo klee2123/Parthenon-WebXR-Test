@@ -49,6 +49,7 @@
 			for groups of content that are positioned relative to some surface or other feature.
 			*/
 			class HitTestExample extends XRExampleBase {
+				c = 0;
 				constructor(domElement){
 					super(domElement, false)
 					// A message at the bottom of the screen that shows whether a surface has been found
@@ -64,7 +65,6 @@
 
 				// Called during construction to allow the app to populate this.scene
 				initializeScene(){
-					var c = 0
 					// Add a box at the scene origin
 					let box = new THREE.Mesh(
 						new THREE.BoxBufferGeometry(0.1, 0.1, 0.1),
