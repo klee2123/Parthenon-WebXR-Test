@@ -59,12 +59,12 @@
 					this._messageEl.style.left = '10px'
 					this._messageEl.style.color = 'white'
 					this._messageEl.style['font-size'] = '16px'
-
 					this.el.addEventListener('touchstart', this._onTouchStart.bind(this), false)
 				}
 
 				// Called during construction to allow the app to populate this.scene
 				initializeScene(){
+					var c = 0;
 					// Add a box at the scene origin
 					let box = new THREE.Mesh(
 						new THREE.BoxBufferGeometry(0.1, 0.1, 0.1),
