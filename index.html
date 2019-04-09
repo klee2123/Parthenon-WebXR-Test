@@ -35,6 +35,7 @@
 
 	</head>
 	<body>
+		
 		<div id="target" />
 		<div onclick="hideMe(this)" id="description">
 			<h2>Hit Test</h2>
@@ -118,18 +119,21 @@
 				// Creates a box used to indicate the location of an anchor offset
 				_createSceneGraphNode(){
 					let group = new THREE.Group();
-					var loader = new THREE.GLTFLoader();
-					loader.load(
-						'AthenaParthnos.glb', 
-						(gltf) => {
-							this.group.add(gltf.scene);
-						}
-					);
+					let flower = new Gltf2Node({url: 'AthenaParthenos.glb'});
+
+// 					var loader = new THREE.GLTFLoader();
+// 					loader.load(
+// 						'AthenaParthnos.glb', 
+// 						(gltf) => {
+// 							this.group.add(gltf.scene);
+// 						}
+// 					);
 // 					let geometry = new THREE.BoxBufferGeometry(0.1, 0.1, 0.1)
 // 					let material = new THREE.MeshPhongMaterial({ color: '#99FF99' })
 // 					let mesh = new THREE.Mesh(geometry, material)
 // 					mesh.position.set(0, 0.05, 0)
 //					group.add(mesh)
+					group.add(flower);
 					return group
 
 				}
