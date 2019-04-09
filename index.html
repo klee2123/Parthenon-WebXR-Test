@@ -8,13 +8,7 @@
 		
 		<script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
 		<script src="https://rawgit.com/google-ar/three.ar.js/master/dist/three.ar.js"></script>
-		<script src="https://rawgit.com/chenzlabs/aframe-ar/master/dist/aframe-ar.js"></script>
-		<script src="./components/aframe-lod.js"></script>
-		<script src="./components/camera-cube-env.js"></script>
-		<script src="./components/refract-cube-env.js"></script>
-		<script src="./components/normal-scale-component.js"></script>
-		<script src="./components/object-visible-event-component.js"></script>
-		
+		<script src="https://rawgit.com/chenzlabs/aframe-ar/master/dist/aframe-ar.js"></script>		
 		
 		<style>
 			body, html {
@@ -137,14 +131,14 @@
 
 				// Creates a box used to indicate the location of an anchor offset
 				_createSceneGraphNode(){
-					let group = new THREE.Group();
-					group.add(parthenos);
+					//let group = new THREE.Group();
+					scene.add(parthenos);
 // 					let geometry = new THREE.BoxBufferGeometry(0.1, 0.1, 0.1)
 // 					let material = new THREE.MeshPhongMaterial({ color: '#99FF99' })
 // 					let mesh = new THREE.Mesh(geometry, material)
 // 					mesh.position.set(0, 0.05, 0)
 //					group.add(mesh)
-					return group
+// 					return group
 
 				}
 			}
