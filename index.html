@@ -123,27 +123,20 @@
 				_createSceneGraphNode(){
 					let group = new THREE.Group();
 
-					// Instantiate a loader
-					var loader = new THREE.GLTFLoader();
-					// Load a glTF resource
-					loader.load(
-						// resource URL
-						'AthenaParthenos.glb',
-						// called when the resource is loaded
-						function ( gltf ) {
-							group.add( gltf.scene );
-						}						
+// 					var loader = new THREE.GLTFLoader();
+// 					loader.load(
+// 						'AcropolisModel.gltf',
+// 						function ( gltf ) {
+// 							group.add( gltf.scene );
+// 						}						
 					);
-					
-					
-					
-					//let group = new THREE.Group();
-// 					let geometry = new THREE.BoxBufferGeometry(0.1, 0.1, 0.1)
-// 					let material = new THREE.MeshPhongMaterial({ color: '#99FF99' })
-// 					let mesh = new THREE.Mesh(geometry, material)
-// 					return mesh;
-					//mesh.position.set(0, 0.05, 0)
-					//group.add(mesh)
+										
+					let geometry = new THREE.BoxBufferGeometry(0.1, 0.1, 0.1)
+					let material = new THREE.MeshPhongMaterial({ color: '#5bfcff' })
+					let mesh = new THREE.Mesh(geometry, material)
+					return mesh;
+					mesh.position.set(0, 0.05, 0)
+					group.add(mesh)
 					return group
 
 				}
