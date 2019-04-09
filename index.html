@@ -4,6 +4,18 @@
 		<title>Hit test example</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		
+		
+		<script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
+		<script src="https://rawgit.com/google-ar/three.ar.js/master/dist/three.ar.js"></script>
+		<script src="https://rawgit.com/chenzlabs/aframe-ar/master/dist/aframe-ar.js"></script>
+		<script src="./components/aframe-lod.js"></script>
+		<script src="./components/camera-cube-env.js"></script>
+		<script src="./components/refract-cube-env.js"></script>
+		<script src="./components/normal-scale-component.js"></script>
+		<script src="./components/object-visible-event-component.js"></script>
+		
+		
 		<style>
 			body, html {
 				padding: 0;
@@ -42,6 +54,13 @@
 			<h5>(click to dismiss)</h5>
 			<p>Find anchors by searching on tap events.</p>
 		</div>
+		
+		<a-scene id="ascene" background="color:#5f5f5f; transparent: true;" class="fullscreen" keyboard-shortcuts="" screenshot="" vr-mode-ui="" shadow="autoUpdate: true; type:pcfsoft" visible="true" ar>
+			<a-assets>
+				<a-asset-item id="parthenos" src="AthenaParthenos.glb" ></a-asset-item>
+			</a-assets>
+		</a-scene>
+		
 		<script>
 			/*
 			HitTestExample shows how to find surfaces or other features and place content relative to them.
@@ -119,13 +138,7 @@
 				// Creates a box used to indicate the location of an anchor offset
 				_createSceneGraphNode(){
 					let group = new THREE.Group();
-					var loader = new THREE.GLTFLoader();
-					loader.load(
-						'AthenaParthnos.glb', 
-						(gltf) => {
-							this.group.add(gltf.scene);
-						}
-					);
+					group.add(parthenos);
 // 					let geometry = new THREE.BoxBufferGeometry(0.1, 0.1, 0.1)
 // 					let material = new THREE.MeshPhongMaterial({ color: '#99FF99' })
 // 					let mesh = new THREE.Mesh(geometry, material)
