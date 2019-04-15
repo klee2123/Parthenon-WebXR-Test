@@ -120,9 +120,10 @@
 				}
 
 				// Creates a box used to indicate the location of an anchor offset
-				_createSceneGraphNode(){
+				_createSceneGraphNode(){ 
 					let group = new THREE.Group();
-
+					
+					
 // 					var loader = new THREE.GLTFLoader();
 // 					loader.load(
 // 						'AcropolisModel.gltf',
@@ -130,6 +131,7 @@
 // 							group.add( gltf.scene );
 // 						}						
 //					);
+					
 										
 					let geometry = new THREE.BoxBufferGeometry(0.1, 0.1, 0.1)
 					let material = new THREE.MeshPhongMaterial({ color: '#5BFCFF' })
