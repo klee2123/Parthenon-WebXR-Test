@@ -126,12 +126,22 @@
 
 					var renderer = new THREE.WebGLRenderer();
 					renderer.setSize( window.innerWidth, window.innerHeight );
-					document.body.appendChild( renderer.domElement );
-
-					var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-					var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-					var cube = new THREE.Mesh( geometry, material );
-					scene.add( cube );
+					document.body.appendChild( renderer.domElement );					
+					
+					var loader = new THREE.GLTFLoader();
+					loader.load(
+						'AcropolisModel.gltf',
+						function ( gltf ) {
+							scene.add( gltf.scene );
+						}						
+					);
+					
+// 					let group = new THREE.Group();
+					
+// 					var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+// 					var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+// 					var cube = new THREE.Mesh( geometry, material );
+// 					scene.add( cube );
 
 					camera.position.z = 5;
 					//Then you also have to add something to animate the scene.  
@@ -141,17 +151,7 @@
 					    renderer.render( scene, camera );
 					}
 					animate();
-// 					let group = new THREE.Group();
-					
-					
-// // 					var loader = new THREE.GLTFLoader();
-// // 					loader.load(
-// // 						'AcropolisModel.gltf',
-// // 						function ( gltf ) {
-// // 							group.add( gltf.scene );
-// // 						}						
-// //					);
-					
+
 										
 // 					let geometry = new THREE.BoxBufferGeometry(0.1, 0.1, 0.1)
 // 					let material = new THREE.MeshPhongMaterial({ color: '#5BFCFF' })
